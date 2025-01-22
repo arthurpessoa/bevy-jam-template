@@ -7,7 +7,7 @@ edition = "2021"
 bevy = "0.15.1"
 leafwing-input-manager = "0.16.0"
 bevy_panorbit_camera = "0.21.1"
-
+i-cant-believe-its-not-bsn = "0.3.0"
 
 # Enable max optimizations for dependencies, but not for our code:
 [profile.dev.package."*"]

@@ -1,5 +1,6 @@
-use crate::screen::title::TitleScreenPlugin;
 use crate::screen::states::ScreenState;
+use crate::screen::TitleScreenPlugin;
+use crate::screen::WorldScreenPlugin;
 use bevy::prelude::*;
 use std::fmt::Debug;
 
@@ -10,6 +11,7 @@ impl Plugin for ScreenPlugin {
         app
             .init_state::<ScreenState>()
             .add_plugins(TitleScreenPlugin)
+            .add_plugins(WorldScreenPlugin)
         ;
     }
 }

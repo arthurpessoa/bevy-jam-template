@@ -1,5 +1,6 @@
-use crate::terrain::systems::on_terrain_added;
+
 use bevy::prelude::*;
+use crate::screen::terrain::systems::on_terrain_added;
 
 pub struct TerrainPlugin;
 

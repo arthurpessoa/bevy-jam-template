@@ -4,5 +4,5 @@ use bevy::prelude::States;
 pub enum ScreenState {
     #[default]
     InTitle,
-    InGame,
+    InWorld,
 }

@@ -5,4 +5,6 @@ mod world;
 
 pub use plugins::*;
 
+pub use title::*;
+pub use world::*;
 

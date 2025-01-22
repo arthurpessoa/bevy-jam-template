@@ -1,9 +1,9 @@
-use crate::terrain::Terrain;
+use crate::screen::world::terrain::Terrain;
+use bevy::pbr::light_consts::lux::OVERCAST_DAY;
 use bevy::prelude::*;
 use bevy_panorbit_camera::PanOrbitCamera;
-use bevy::pbr::light_consts::lux::OVERCAST_DAY;
 use std::f32::consts::PI;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 pub fn on_terrain_added(
     mut commands: Commands,
@@ -11,7 +11,6 @@ pub fn on_terrain_added(
     mut meshes: ResMut<Assets<Mesh>>,
     query: Query<Entity, Added<Terrain>>,
 ) {
-
     let start = Instant::now();
 
     for entity in query.iter() {

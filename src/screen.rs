@@ -1,6 +1,7 @@
+use crate::terrain::*;
+use crate::ui::*;
 use bevy::prelude::*;
 use std::fmt::Debug;
-use crate::ui::MainMenuUI;
 #[derive(States, Default, Debug, Clone, PartialEq, Eq, Hash)]
 pub enum GameState {
     #[default]
@@ -14,8 +15,11 @@ pub struct MainMenu;
 
 
 #[derive(Component, Clone, Default, Debug)]
-#[require(Camera2d)]
-pub struct GameScreen;
+#[require(
+    Terrain,
+    InGameUI
+)]
+pub struct InGame;
 
 pub struct StatePlugin;
 
@@ -24,7 +28,7 @@ impl Plugin for StatePlugin {
         app
             .init_state::<GameState>()
             .add_plugins(ScreenPlugin { state: GameState::MainMenu, root: MainMenu })
-            .add_plugins(ScreenPlugin { state: GameState::InGame, root: GameScreen })
+            .add_plugins(ScreenPlugin { state: GameState::InGame, root: InGame })
         ;
     }
 }
@@ -34,8 +38,7 @@ pub struct ScreenPlugin<C: Component + Clone + Default> {
 }
 impl<C: Component + Clone + Default + Debug> Plugin for ScreenPlugin<C> {
     fn build(&self, app: &mut App) {
-        debug!("Adding screen plugin for state: {:?} with root_component: {:?}", self.state, self.root);
-
+        println!("Adding screen plugin for state: {:?} with root_component: {:?}", self.state, self.root);
         app
             .add_systems(OnEnter(self.state.clone()), |mut commands: Commands| {
                 commands.spawn(C::default());
@@ -44,7 +47,6 @@ impl<C: Component + Clone + Default + Debug> Plugin for ScreenPlugin<C> {
                 for entity in query.iter() {
                     commands.entity(entity).despawn_recursive()
                 }
-            })
-        ;
+            });
     }
 }

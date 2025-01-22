@@ -1,20 +1,20 @@
 mod settings;
-mod screen;
 mod ui;
 mod terrain;
+mod screen;
 
+use crate::terrain::TerrainPlugin;
+use crate::screen::ScreenPlugin;
 use bevy::prelude::*;
 use bevy_panorbit_camera::PanOrbitCameraPlugin;
-use screen::StatePlugin;
 use settings::SettingsPlugin;
 use ui::UIPlugin;
-use crate::terrain::TerrainPlugin;
 
 fn main() {
     App::new()
         .add_plugins((
             SettingsPlugin,
-            StatePlugin,
+            ScreenPlugin,
             UIPlugin,
             TerrainPlugin,
             PanOrbitCameraPlugin

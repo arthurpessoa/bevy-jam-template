@@ -12,6 +12,7 @@ pub(super) fn setup(mut commands: Commands) {
 pub(super) fn cleanup(mut commands: Commands, query: Query<Entity, With<WorldScreen>>) {
     for entity in query.iter() {
         println!("Despawning title screen entity: {:?}", entity);
-        commands.entity(entity).despawn_recursive();
+        commands.entity(entity).despawn_descendants();
+        commands.entity(entity).despawn();
     }
 }

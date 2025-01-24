@@ -2,10 +2,12 @@ use crate::settings::actions::Action;
 use crate::settings::resources::WindowSettings;
 use crate::settings::systems::{changed_window_settings, config_input};
 use bevy::app::{App, Plugin, Startup, Update};
+use bevy::pbr::wireframe::WireframePlugin;
 use bevy::prelude::*;
 use bevy::render::settings::{RenderCreation, WgpuSettings};
 use bevy::render::RenderPlugin;
 use bevy::DefaultPlugins;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use leafwing_input_manager::plugin::InputManagerPlugin;
 
 pub struct SettingsPlugin;
@@ -33,6 +35,8 @@ impl Plugin for SettingsPlugin {
                 }))
             .insert_resource(settings)
             .add_plugins(InputManagerPlugin::<Action>::default())
+            .add_plugins(WireframePlugin)
+            .add_plugins(WorldInspectorPlugin::new())
             .add_systems(Update, changed_window_settings.run_if(resource_changed::<WindowSettings>))
             .add_systems(Startup, config_input);
     }

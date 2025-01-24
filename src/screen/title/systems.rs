@@ -46,6 +46,7 @@ pub(super) fn enter_world(query: Query<&ActionState<Action>>, mut next_screen: R
 pub(super) fn cleanup(mut commands: Commands, query: Query<Entity, With<TitleScreen>>) {
     for entity in query.iter() {
         println!("Despawning title screen entity: {:?}", entity);
-        commands.entity(entity).despawn_recursive();
+        commands.entity(entity).despawn_descendants();
+        commands.entity(entity).despawn();
     }
 }
